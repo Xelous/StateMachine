@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Roller", "Roller.vcxproj", "{3CC8CF17-8957-4C8B-A163-39ADE1D63DFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CC8CF17-8957-4C8B-A163-39ADE1D63DFE}.Debug|x64.ActiveCfg = Debug|x64
+		{3CC8CF17-8957-4C8B-A163-39ADE1D63DFE}.Debug|x64.Build.0 = Debug|x64
+		{3CC8CF17-8957-4C8B-A163-39ADE1D63DFE}.Release|x64.ActiveCfg = Release|x64
+		{3CC8CF17-8957-4C8B-A163-39ADE1D63DFE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40C4B8B5-D227-41FE-966A-9BBE1C3E6B03}
+	EndGlobalSection
+EndGlobal
