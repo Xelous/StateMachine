@@ -21,13 +21,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -61,6 +61,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PreprocessToFile>false</PreprocessToFile>
       <PreprocessKeepComments>true</PreprocessKeepComments>
+      <AdditionalIncludeDirectories>${ProjectDir}/unconstexpr-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,11 +90,9 @@
   <ItemGroup>
     <ClInclude Include="ActionResult.h" />
     <ClInclude Include="counter.hpp" />
-    <ClInclude Include="ErrorHeader.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventMessageHandler.h" />
     <ClInclude Include="EventSystem.h" />
-    <ClInclude Include="EventTransmitter.h" />
     <ClInclude Include="LoadFileDataErrors.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
@@ -102,15 +101,12 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventMessageHandler.cpp" />
     <ClCompile Include="EventSystem.cpp" />
-    <ClCompile Include="EventTransmitter.cpp" />
     <ClCompile Include="Roller.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="class" />
     <None Include="generate" />
-    <None Include="list" />
     <None Include="LoadFileDataResult.err" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -12,8 +12,6 @@
 
 namespace xelous
 {
-    class Event;
-
     class EventSystem;
     using EventSystemSharedPtr = std::shared_ptr<EventSystem>;
     using EventSystemWeakPtr = std::weak_ptr<EventSystem>;
@@ -27,35 +25,45 @@ namespace xelous
 
         friend class std::_Ref_count_obj<EventSystem>;
 
-        std::atomic<bool> mExitFlag{ false };
+        std::atomic<bool> mExitFlag {false};
         std::thread mDeliveryThread;
 
-        std::atomic<bool> mIsRunning{ false };
+        std::atomic<bool> mIsRunning {false};
 
         std::mutex mEventQueueLock;
-        std::queue<Event*> mEventQueue;
+        std::queue<BaseEvent*> mEventQueue;
 
-        void DequeueEvent(Event* event);
+        void DequeueEvent(BaseEvent* event);
 
         void Start();
         void Stop();
         void DeliveryFunction();
 
         std::mutex mClientStateMachinesLock;
-        std::vector<StateMachineWeakPtr> mClientStateMachines;        
-        
+        std::vector<StateMachineWeakPtr> mClientStateMachines;
+
+        void RaiseEvent(BaseEvent* const pEvent);
+
     public:
-        static EventSystemSharedPtr Create();        
+        static EventSystemSharedPtr Create();
         static EventSystemSharedPtr Get();
 
         ~EventSystem();
 
-        inline EventSystemWeakPtr GetReference() { return weak_from_this(); }
+        inline EventSystemWeakPtr GetReference()
+        {
+            return weak_from_this();
+        }
 
-        void RegisterStateMachine(StateMachineWeakPtr& pStateMachine);        
+        void RegisterStateMachine(StateMachineWeakPtr& pStateMachine);
 
-        void RaiseEvent(Event *const pEvent);
-
+        template<typename T>
+        void RaiseEvent(T* const pEvent)
+        {
+            if (pEvent != nullptr)
+            {
+                RaiseEvent(reinterpret_cast<BaseEvent*>(pEvent));
+            }
+        }
     };
-
 }

@@ -2,26 +2,32 @@
 
 namespace xelous
 {
-	const bool Event::operator==(const EventId& id) const
-	{
-		return Id == id;
-	}
+    /*constexpr int NextEventId()
+       {
+        using counter = unconstexpr::meta_counter<>;
+        return counter::next();
+       }
 
-	const bool Event::operator==(const Event& other) const
-	{
-		return other.Id == Id;
-	}
+       const EventId Event::Id {NextEventId()};*/
 
-	Event::Event(const Event& other)
-		:
-		Id(other.Id)
-	{
+    /*const bool Event::operator==(const EventId& id) const
+       {
+        return cId == id;
+       }
 
-	}
-	
-	Event::Event(const EventId& id)
-		:
-		Id(id)
-	{
-	}
+       const bool Event::operator==(const Event& other) const
+       {
+        return other.cId == cId;
+       }*/
+
+    /*Event::Event(const Event& other)
+        : Id(other.Id)
+       {
+       }
+
+       Event::Event(const EventId& id)
+        : Id(id)
+       {
+       }*/
 }
+

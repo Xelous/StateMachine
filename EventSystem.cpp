@@ -2,7 +2,7 @@
 
 namespace xelous
 {
-    EventSystemSharedPtr EventSystem::sInstance{ nullptr };
+    EventSystemSharedPtr EventSystem::sInstance {nullptr};
 
     EventSystem::EventSystem()
     {
@@ -14,7 +14,7 @@ namespace xelous
         Stop();
     }
 
-    void EventSystem::DequeueEvent(Event* event)
+    void EventSystem::DequeueEvent(BaseEvent* event)
     {
         std::scoped_lock lock(mEventQueueLock);
         if (!mEventQueue.empty())
@@ -26,7 +26,7 @@ namespace xelous
     }
 
     void EventSystem::Start()
-    {        
+    {
         mDeliveryThread = std::thread(std::bind(&EventSystem::DeliveryFunction, this));
     }
 
@@ -43,10 +43,10 @@ namespace xelous
     {
         mExitFlag = false;
         mIsRunning = true;
-        Event* currentEvent{};
-        std::queue<Event*> localEventVersion;                
+        BaseEvent* currentEvent {};
+        std::queue<BaseEvent*> localEventVersion;
         while (!mExitFlag)
-        {       
+        {
             std::this_thread::sleep_for(std::chrono::microseconds(100));
 
             {
@@ -55,7 +55,7 @@ namespace xelous
                 if (!mEventQueue.empty())
                 {
                     std::swap(mEventQueue, localEventVersion);
-                }                
+                }
             }
 
             while (!localEventVersion.empty())
@@ -64,18 +64,18 @@ namespace xelous
                 localEventVersion.pop();
 
                 std::scoped_lock lock(mClientStateMachinesLock);
-                for(auto& stateMachine : mClientStateMachines)
-                {                    
+                for (auto& stateMachine : mClientStateMachines)
+                {
                     if (!stateMachine.expired())
                     {
                         auto local = stateMachine.lock();
                         if (local->HandleEvent(currentEvent))
                         {
                             // COUNT metrics?
-                        }                    
-                    }                    
+                        }
+                    }
                     // TODO - remove dead clients
-                }                
+                }
             }
         }
         mIsRunning = false;
@@ -101,7 +101,7 @@ namespace xelous
         mClientStateMachines.push_back(pStateMachine);
     }
 
-    void EventSystem::RaiseEvent(Event* const pEvent)
+    void EventSystem::RaiseEvent(BaseEvent* const pEvent)
     {
         if (pEvent != nullptr)
         {
@@ -109,5 +109,4 @@ namespace xelous
             mEventQueue.push(pEvent);
         }
     }
-
 }

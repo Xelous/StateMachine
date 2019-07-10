@@ -8,64 +8,64 @@
 namespace xelous
 {
 #ifndef MakeEventLocalAs
-	#define MakeEventLocalAs(EventIn_, UsableTypeOut_, VariableName_)			\
-        UsableTypeOut_* VariableName_ { nullptr };                              \
-        if (EventIn_ != nullptr )                                               \
-        {                                                                       \
-            VariableName_ = reinterpret_cast<UsableTypeOut_*>(EventIn_);         \
-        }
+        #define MakeEventLocalAs(EventIn_, UsableTypeOut_, VariableName_)                       \
+    UsableTypeOut_* VariableName_ {nullptr};                              \
+    if (EventIn_ != nullptr)                                               \
+    {                                                                       \
+        VariableName_ = reinterpret_cast<UsableTypeOut_*>(EventIn_);         \
+    }
 #endif
 
-	class StateMachine; 
+    class StateMachine;
 
-	class StateBase;
-	class StateBase
-	{
-	private:
-		friend class StateMachine;
+    class StateBase;
+    class StateBase
+    {
+    private:
+        friend class StateMachine;
 
-		const char* Name;			
+        const char* Name;
 
-	public:
-		StateBase(const char* const name);		
+    public:
+        StateBase(const char* const name);
 
-		virtual void Initialise() = 0;
-		virtual void OnEnter() = 0;
-		virtual void OnExit() = 0;
+        virtual void Initialise() = 0;
+        virtual void OnEnter() = 0;
+        virtual void OnExit() = 0;
 
-		const std::string GetName() const noexcept;				
+        const std::string GetName() const noexcept;
 
-        void RaiseEvent(Event* const event);
+        void RaiseEvent(Event<EventId, 1>* const event);
 
-	protected:
+    protected:
 
-		void Enter()
-		{
-			OnEnter();
-		}
+        void Enter()
+        {
+            OnEnter();
+        }
 
-		void Exit()
-		{
-			OnExit();
-		}
-	};
+        void Exit()
+        {
+            OnExit();
+        }
+    };
 
-	class State : public StateBase, public EventMessageHandler
-	{	
-	private:
-		State* mChild{ nullptr };		
+    class State : public StateBase, public EventMessageHandler
+    {
+    private:
+        State* mChild {nullptr};
 
-	public:
-		State(const char* const name);
+    public:
+        State(const char* const name);
 
-		void SetChild(const State* newChild);
+        void SetChild(const State* newChild);
 
-		void Initialise() override;
-		void OnEnter() override;
-		void OnExit() override;
+        void Initialise() override;
+        void OnEnter() override;
+        void OnExit() override;
 
-		void ProcessEventMessage(Event* const event, ActionResult& result, bool& handled) override;
-	};
-
-
+        void ProcessEventMessage(BaseEvent* const event,
+                                 ActionResult& result,
+                                 bool& handled) override;
+    };
 }

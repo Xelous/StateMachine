@@ -24,9 +24,6 @@
     <ClInclude Include="LoadFileDataErrors.h">
       <Filter>Header Files\err</Filter>
     </ClInclude>
-    <ClInclude Include="ErrorHeader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -43,9 +40,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventMessageHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EventTransmitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,9 +62,6 @@
     <ClCompile Include="EventMessageHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EventTransmitter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="generate">
@@ -78,12 +69,6 @@
     </None>
     <None Include="LoadFileDataResult.err">
       <Filter>Header Files\err</Filter>
-    </None>
-    <None Include="list">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="class">
-      <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
 </Project>

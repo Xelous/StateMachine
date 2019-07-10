@@ -2,35 +2,69 @@
 
 #include <memory>
 #include <cstdint>
+#include <atomic>
 #include "ActionResult.h"
 
 namespace xelous
 {
-	using EventId = uint64_t;
+    using EventId = uint64_t;
 
-	class Event;    
-	class Event : public std::enable_shared_from_this<Event>
-	{
-	public:
-		const EventId Id;
+    class BaseEvent
+    {
+    private:
+        EventId mInternalEventId;
 
-		Event& operator=(const Event&) = delete;
-		Event& operator=(const Event&&) = delete;
+    public:
 
-		const bool operator==(const EventId& id) const;
-		const bool operator==(const Event& other) const;		
+        BaseEvent() = delete;
+        BaseEvent(const EventId& eventIdCode)
+            : mInternalEventId(eventIdCode)
+        {
+        }
 
-		inline const bool& GetHandled() const { return mHandled; }
+        inline const EventId& EventIdCode() const noexcept
+        {
+            return mInternalEventId;
+        }
 
-		inline void Reset() { mHandled = false; }
+        const bool operator==(const EventId& id) const noexcept
+        {
+            return id == mInternalEventId;
+        }
 
-	protected:
-		Event() = delete;
-		Event(const Event& other);
-		Event(const Event&&) = delete;
-		Event(const EventId& id);			
+        const bool operator==(const BaseEvent& other) const noexcept
+        {
+            return other.mInternalEventId == mInternalEventId;
+        }
+    };
 
-		bool mHandled{ false };
-	};
+    template<typename T, int Code, class = typename std::enable_if<std::is_integral<T>::value>::type>
+    class Event : public BaseEvent
+    {
+    public:
+        static const EventId Id {Code};
 
+        Event& operator=(const Event&) = delete;
+        Event& operator=(const Event&&) = delete;
+
+        inline const bool& GetHandled() const
+        {
+            return mHandled.load(std::memory_order::memory_order_consume);
+        }
+
+        inline void Reset() noexcept
+        {
+            mHandled = false;
+        }
+
+    protected:
+        Event()
+            : BaseEvent(Code)
+        {
+        }
+        Event(const Event& other) = default;
+        Event(const Event&&) = delete;
+
+        std::atomic<bool> mHandled {false};
+    };
 }
