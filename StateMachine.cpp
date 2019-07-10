@@ -1,5 +1,9 @@
 #include "StateMachine.h"
 
+#ifdef _DEBUG
+    #include <iostream>
+#endif
+
 namespace xelous
 {
     StateMachineSharedPtr StateMachine::Create(const std::string& name,
@@ -101,9 +105,6 @@ namespace xelous
     void StateMachine::EnqueueEvent(BaseEvent* const e)
     {
         std::scoped_lock lock(mEventQueueLock);
-
-        // TODO - unique add to queue
-
         mEventQueue.push(e);
     }
 
@@ -165,20 +166,31 @@ namespace xelous
     {
         switch (result.first)
         {
-        case ActionResultCode::NewState:
-            EnterState(result.second);
+        case ActionResultCode::Nothing:
             break;
 
-        case ActionResultCode::ExitState:
-            ExitState();
+        case ActionResultCode::NewState:
+            EnterState(result.second);
             break;
 
         case ActionResultCode::NewChildState:
             EnterChildState(result.second);
             break;
 
+        case ActionResultCode::ExitChildState:
+            ExitChildState();
+            break;
+
         case ActionResultCode::ExitStateMachine:
             ExitStateMachine();
+            break;
+
+        case ActionResultCode::ExitState:
+            ExitState();
+            break;
+
+        case ActionResultCode::Error:
+            ReportError();
             break;
         }
     }
@@ -211,8 +223,23 @@ namespace xelous
         }
     }
 
+    void StateMachine::ExitChildState()
+    {
+        if (mCurrentState)
+        {
+            mCurrentState->ExitChild();
+        }
+    }
+
     void StateMachine::ExitStateMachine()
     {
         mMasterExitFlag = true;
+    }
+
+    void StateMachine::ReportError()
+    {
+#if _DEBUG
+        std::cout << "Error in State Machine [" << Name << "]" << std::endl;
+#endif
     }
 }

@@ -53,19 +53,31 @@ namespace xelous
     class State : public StateBase, public EventMessageHandler
     {
     private:
+        // TODO - make smart pointer
         State* mChild {nullptr};
 
-    public:
-        State(const char* const name);
+        friend class StateMachine;
 
         void SetChild(const State* newChild);
+
 
         void Initialise() override;
         void OnEnter() override;
         void OnExit() override;
 
+        void ExitChild();
+
+    public:
+        State(const char* const name);
+        ~State();
+
         void ProcessEventMessage(BaseEvent* const event,
                                  ActionResult& result,
                                  bool& handled) override;
+
+        inline const bool HasChild() const noexcept
+        {
+            return mChild != nullptr;
+        }
     };
 }

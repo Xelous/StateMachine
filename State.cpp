@@ -34,6 +34,11 @@ namespace xelous
     {
     }
 
+    State::~State()
+    {
+        Exit();
+    }
+
     void State::Initialise()
     {
         Message("Initialising [" + GetName() + "]");
@@ -58,6 +63,20 @@ namespace xelous
         auto nonConst = const_cast<State*>(newChild);
         mChild = nonConst;
         mChild->Enter();
+    }
+
+    void State::ExitChild()
+    {
+        if (HasChild())
+        {
+            State* temp {nullptr};
+            std::swap(mChild, temp);
+            if (temp)
+            {
+                delete temp;
+                temp = nullptr;
+            }
+        }
     }
 
     void State::ProcessEventMessage(BaseEvent* const event,

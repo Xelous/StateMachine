@@ -95,6 +95,8 @@ namespace xelous
         void EnterState(const State* newState);
         void ExitState();
         void EnterChildState(const State* newState);
+        void ExitChildState();
         void ExitStateMachine();
+        void ReportError();
     };
 }

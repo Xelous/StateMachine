@@ -3,118 +3,86 @@
 #include <memory>
 #include <cassert>
 
+namespace GlobalCounterTests
+{
 #include "counter.hpp"
 
 
-DefineCompileTimeCounter(GlobalCounter1);
+    DefineCompileTimeCounter(GlobalCounter1);
 
-enum class ValuesAA
-{
-    A = GlobalCounter1Next(),
-    B,
-    C,
-    D,
-    Max
-};
-
-enum class ValuesBB
-{
-    A = GlobalCounter1Next(),
-    B,
-    C,
-    D,
-    Max
-};
-
-template<typename EnumType>
-uint64_t EnumToUint64(const EnumType& value)
-{
-    static_assert(std::is_enum<EnumType>::value);
-    return static_cast<uint64_t>(value);
-}
-
-template<typename EnumType, class = typename std::enable_if<std::is_enum<EnumType>::value>::type>
-std::ostream& operator<<(std::ostream& stream,
-                         EnumType value)
-{
-    stream << static_cast<uint64_t>(value);
-    return stream;
-}
-
-//std::ostream& operator<<(std::ostream& stream,
-//                         ValuesAA value)
-//{
-//    stream << static_cast<uint64_t>(value);
-//    return stream;
-//}
-
-DefineCompileTimeCounter(Jon);
-DefineCompileTimeCounter(Another);
-
-void Roller()
-{
-    std::cout << ValuesAA::A << std::endl;
-    std::cout << EnumToUint64(ValuesAA::A) << std::endl;
-    std::cout << EnumToUint64(ValuesAA::B) << std::endl;
-    std::cout << EnumToUint64(ValuesAA::C) << std::endl;
-    std::cout << EnumToUint64(ValuesAA::D) << std::endl;
-    std::cout << "----" << std::endl;
-
-    std::cout << EnumToUint64(ValuesBB::A) << std::endl;
-    std::cout << EnumToUint64(ValuesBB::B) << std::endl;
-    std::cout << EnumToUint64(ValuesBB::C) << std::endl;
-    std::cout << EnumToUint64(ValuesBB::D) << std::endl;
-    std::cout << "----" << std::endl;
-
-    constexpr auto one = JonNext();
-    constexpr auto two = JonNext();
-    constexpr auto three = JonNext();
-
-    constexpr auto anotherOne = AnotherNext();
-    constexpr auto anotherTwo = AnotherNext();
-    constexpr auto anotherThree = AnotherNext();
-
-    std::cout << one << " " << two << " " << three << std::endl;
-    std::cout << anotherOne << " " << anotherTwo << " " << anotherThree << std::endl;
-
-    constexpr int a = GlobalCounter1Next();
-    constexpr int b = GlobalCounter1Next();
-    constexpr int c = GlobalCounter1Next();
-
-    std::cout << a << " " << b << " " << c << std::endl;
-}
-
-
-class Bar : public std::enable_shared_from_this<Bar>
-{
-public:
-    const int index {JonNext()};
-
-    void Print()
+    enum class ValuesAA
     {
-        std::cout << "Bar [" << index << "]" << std::endl;
+        A = GlobalCounter1Next(),
+        B,
+        C,
+        D,
+        Max
+    };
+
+    enum class ValuesBB
+    {
+        A = GlobalCounter1Next(),
+        B,
+        C,
+        D,
+        Max
+    };
+
+    template<typename EnumType>
+    uint64_t EnumToUint64(const EnumType& value)
+    {
+        static_assert(std::is_enum<EnumType>::value);
+        return static_cast<uint64_t>(value);
     }
 
-    std::shared_ptr<Bar> GetShared()
+    template<typename EnumType, class = typename std::enable_if<std::is_enum<EnumType>::value>::type>
+    std::ostream& operator<<(std::ostream& stream,
+                             EnumType value)
     {
-        return shared_from_this();
+        stream << static_cast<uint64_t>(value);
+        return stream;
     }
 
-    std::weak_ptr<Bar> GetWeak()
+    DefineCompileTimeCounter(Jon);
+    DefineCompileTimeCounter(Another);
+
+    void Roller()
     {
-        return weak_from_this();
+        std::cout << ValuesAA::A << std::endl;
+        std::cout << EnumToUint64(ValuesAA::A) << std::endl;
+        std::cout << EnumToUint64(ValuesAA::B) << std::endl;
+        std::cout << EnumToUint64(ValuesAA::C) << std::endl;
+        std::cout << EnumToUint64(ValuesAA::D) << std::endl;
+        std::cout << "----" << std::endl;
+
+        std::cout << EnumToUint64(ValuesBB::A) << std::endl;
+        std::cout << EnumToUint64(ValuesBB::B) << std::endl;
+        std::cout << EnumToUint64(ValuesBB::C) << std::endl;
+        std::cout << EnumToUint64(ValuesBB::D) << std::endl;
+        std::cout << "----" << std::endl;
+
+        constexpr auto one = JonNext();
+        constexpr auto two = JonNext();
+        constexpr auto three = JonNext();
+
+        constexpr auto anotherOne = AnotherNext();
+        constexpr auto anotherTwo = AnotherNext();
+        constexpr auto anotherThree = AnotherNext();
+
+        std::cout << one << " " << two << " " << three << std::endl;
+        std::cout << anotherOne << " " << anotherTwo << " " << anotherThree << std::endl;
+
+        constexpr int a = GlobalCounter1Next();
+        constexpr int b = GlobalCounter1Next();
+        constexpr int c = GlobalCounter1Next();
+
+        std::cout << a << " " << b << " " << c << std::endl;
     }
-};
+}
 
-#include <vector>
-
-
-#include <string>
-
-#include <map>
-#include <thread>
-#include <functional>
-
+//=============================================
+// Start State Machine Test
+//=============================================
 #include "State.h"
 #include "Event.h"
 #include "ActionResult.h"
@@ -298,78 +266,4 @@ int main()
     delete se;
 
     sm.reset();
-
-
-
-
-    auto thing = std::make_shared<SomethingElse>();
-    ++thing->shared;
-
-    std::weak_ptr<SomethingElse> weak = thing;
-    ++thing->shared;
-
-    thing.reset();
-
-    if (!weak.expired())
-    {
-        auto actual = weak.lock();
-        ++actual->shared;
-        std::cout << actual->shared << std::endl;
-    }
-
-
-
-    /*A aa = A::One;
-       int av = static_cast<int>(aa);
-
-       av++;
-       A bb = static_cast<A>(av);
-
-       av++;
-       A cc = static_cast<A>(av);*/
-
-
-
-
-    std::vector<std::string> items
-    {
-        "Hello"
-        //ReturnString("Hello World")
-        //ReturnString("Yes"),
-        //ReturnString("Missing has a space"),
-        //ReturnString("No")
-    };
-
-    for (auto s : items)
-    {
-        std::cout << s << std::endl;
-    }
-
-
-    std::cout << "-----------------" << std::endl;
-
-
-
-    auto b = std::make_shared<Bar>();
-    std::cout << "Uses: " << b.use_count() << std::endl;
-
-    auto bp = b->GetShared();
-    std::cout << "Uses: " << b.use_count() << std::endl;
-
-    bp->Print();
-    std::cout << "Uses: " << b.use_count() << std::endl;
-
-    auto bw = b->GetWeak();
-    std::cout << "Uses: " << b.use_count() << std::endl;
-    if (!bw.expired())
-    {
-        auto sp = bw.lock();
-        std::cout << "Uses: " << b.use_count() << std::endl;
-        sp->Print();
-    }
-    std::cout << "Uses: " << b.use_count() << std::endl;
-
-    //Error e;
-    //std::cout << static_cast<int>(Error::Code::None) << std::endl;
-    //std::cout << e.Message() << std::endl;
 }
