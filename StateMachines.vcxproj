@@ -14,8 +14,9 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{3CC8CF17-8957-4C8B-A163-39ADE1D63DFE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Roller</RootNamespace>
+    <RootNamespace>StateMachines</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>StateMachineTest</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -61,7 +62,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PreprocessToFile>false</PreprocessToFile>
       <PreprocessKeepComments>true</PreprocessKeepComments>
-      <AdditionalIncludeDirectories>${ProjectDir}/unconstexpr-master;${ProjectDir};${ProjectDir}/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>${ProjectDir};${ProjectDir}/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,7 +89,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="counter.hpp" />
+    <ClInclude Include="counter\counter.hpp" />
     <ClInclude Include="examples\LigthSwitch\LightOffState.h" />
     <ClInclude Include="examples\LigthSwitch\LightOnState.h" />
     <ClInclude Include="examples\LigthSwitch\SwitchToggledEvent.h" />
@@ -102,7 +103,7 @@
   <ItemGroup>
     <ClCompile Include="examples\LigthSwitch\LightOffState.cpp" />
     <ClCompile Include="examples\LigthSwitch\LightOnState.cpp" />
-    <ClCompile Include="Roller.cpp" />
+    <ClCompile Include="main\Main.cpp" />
     <ClCompile Include="StateMachine\Event.cpp" />
     <ClCompile Include="StateMachine\EventMessageHandler.cpp" />
     <ClCompile Include="StateMachine\EventSystem.cpp" />

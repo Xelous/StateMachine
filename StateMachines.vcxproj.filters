@@ -36,9 +36,6 @@
     <ClInclude Include="StateMachine\StateMachine.h">
       <Filter>StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="counter.hpp">
-      <Filter>counter</Filter>
-    </ClInclude>
     <ClInclude Include="examples\LigthSwitch\LightOffState.h">
       <Filter>examples\LightSwitch</Filter>
     </ClInclude>
@@ -47,6 +44,9 @@
     </ClInclude>
     <ClInclude Include="examples\LigthSwitch\SwitchToggledEvent.h">
       <Filter>examples\LightSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="counter\counter.hpp">
+      <Filter>counter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,14 +65,14 @@
     <ClCompile Include="StateMachine\StateMachine.cpp">
       <Filter>StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="Roller.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="examples\LigthSwitch\LightOffState.cpp">
       <Filter>examples\LightSwitch</Filter>
     </ClCompile>
     <ClCompile Include="examples\LigthSwitch\LightOnState.cpp">
       <Filter>examples\LightSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="main\Main.cpp">
+      <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
