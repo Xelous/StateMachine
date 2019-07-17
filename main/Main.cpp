@@ -34,6 +34,7 @@ int main()
         {
             if (!returnDown)
             {
+                std::cout << "------ Switched --------" << std::endl;
                 xelous::EventSystem::Get()->RaiseEvent(new xelous::SwitchToggledEvent());
                 returnDown = true;
             }
