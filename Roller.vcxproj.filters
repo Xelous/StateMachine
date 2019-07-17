@@ -1,74 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="StateMachine">
+      <UniqueIdentifier>{1070b582-346b-492a-9597-dc9c5cb121fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="main">
+      <UniqueIdentifier>{59d0efa9-2d4b-49c9-aa17-d663fa72779f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="examples">
+      <UniqueIdentifier>{fca90180-7e5b-4dc7-b925-e076bd10059c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\err">
-      <UniqueIdentifier>{2292f1f7-58b4-450b-9087-12915f24671e}</UniqueIdentifier>
+    <Filter Include="examples\LightSwitch">
+      <UniqueIdentifier>{ccb794e8-7ac2-413c-bb07-a056f7a1335b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="counter">
+      <UniqueIdentifier>{68ed4044-2343-45b4-b5ba-883762d76c2f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="StateMachine\ActionResult.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Event.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\EventMessageHandler.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\EventSystem.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\State.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\StateMachine.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
     <ClInclude Include="counter.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>counter</Filter>
     </ClInclude>
-    <ClInclude Include="LoadFileDataErrors.h">
-      <Filter>Header Files\err</Filter>
+    <ClInclude Include="examples\LigthSwitch\LightOffState.h">
+      <Filter>examples\LightSwitch</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="examples\LigthSwitch\LightOnState.h">
+      <Filter>examples\LightSwitch</Filter>
     </ClInclude>
-    <ClInclude Include="EventSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EventMessageHandler.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="examples\LigthSwitch\SwitchToggledEvent.h">
+      <Filter>examples\LightSwitch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="StateMachine\Event.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\EventMessageHandler.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\EventSystem.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\State.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\StateMachine.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
     <ClCompile Include="Roller.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="examples\LigthSwitch\LightOffState.cpp">
+      <Filter>examples\LightSwitch</Filter>
     </ClCompile>
-    <ClCompile Include="EventSystem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="examples\LigthSwitch\LightOnState.cpp">
+      <Filter>examples\LightSwitch</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EventMessageHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="generate">
-      <Filter>Header Files\err</Filter>
-    </None>
-    <None Include="LoadFileDataResult.err">
-      <Filter>Header Files\err</Filter>
-    </None>
   </ItemGroup>
 </Project>

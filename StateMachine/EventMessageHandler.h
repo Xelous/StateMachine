@@ -1,11 +1,11 @@
 #pragma once
 
+#include <iostream>
 #include <mutex>
 #include <map>
 #include <functional>
 #include "Event.h"
 #include "ActionResult.h"
-#include "counter.hpp"
 
 namespace xelous
 {

@@ -101,6 +101,18 @@ namespace xelous
         mClientStateMachines.push_back(pStateMachine);
     }
 
+    void EventSystem::UnregisterStateMachine([[maybe_unused]] StateMachineWeakPtr& pStateMachine)
+    {
+        /*std::scoped_lock lock(mClientStateMachinesLock);
+           for (auto& stateMachine : mClientStateMachines)
+           {
+            if (stateMachine.expired())
+            {
+                mClientStateMachines.erase(stateMachine);
+            }
+           }*/
+    }
+
     void EventSystem::RaiseEvent(BaseEvent* const pEvent)
     {
         if (pEvent != nullptr)

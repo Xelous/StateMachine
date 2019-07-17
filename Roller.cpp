@@ -83,11 +83,11 @@ namespace GlobalCounterTests
 //=============================================
 // Start State Machine Test
 //=============================================
-#include "State.h"
-#include "Event.h"
-#include "ActionResult.h"
-#include "StateMachine.h"
-#include "EventSystem.h"
+#include "StateMachine/State.h"
+#include "StateMachine/Event.h"
+#include "StateMachine/ActionResult.h"
+#include "StateMachine/StateMachine.h"
+#include "StateMachine/EventSystem.h"
 
 
 using namespace xelous;
@@ -103,12 +103,12 @@ class StopEvent : public Event<EventId, 2>
 class PayLoadEvent : public Event<EventId, 3>
 {
 public:
-    inline const std::string& GetMessage() const
+    inline const std::string& GetMessageA() const
     {
         return mMessage;
     }
 
-    void SetMessage(const std::string& pMessage)
+    void SetMessageA(const std::string& pMessage)
     {
         mMessage = pMessage;
     }
@@ -161,11 +161,11 @@ public:
 
             if (pe->GetCounter() == 0)
             {
-                pe->SetMessage("We just set the message");
+                pe->SetMessageA("We just set the message");
             }
             else if (pe->GetCounter() == 1)
             {
-                pe->SetMessage("We just changed that message");
+                pe->SetMessageA("We just changed that message");
             }
             else
             {
@@ -206,11 +206,62 @@ public:
     }
 };
 
+
+
+
+
+
+
+#include <windows.h>
+
+#include "examples/LigthSwitch/LightOnState.h"
+#include "examples/LigthSwitch/LightOffState.h"
+#include "examples/LigthSwitch/SwitchToggledEvent.h"
+
 int main()
 {
-    Roller();
-
     EventSystem::Create();
+    auto theLightSwitch = StateMachine::Create("LightSwitch", new LightOffState());
+    auto theLightSwitchRef = theLightSwitch->GetReference();
+    EventSystem::Get()->RegisterStateMachine(theLightSwitchRef);
+
+    bool exit{ false };
+    bool returnDown{ false };
+    while (!exit)
+    {
+        auto key = GetAsyncKeyState(VK_RETURN);
+        if (key != 0)
+        {
+            if (!returnDown)
+            {
+                EventSystem::Get()->RaiseEvent(new SwitchToggledEvent());
+                returnDown = true;
+            }
+        }
+        else
+        {
+            if (returnDown)
+            {
+                returnDown = false;
+            }
+        }
+
+        key = GetAsyncKeyState(VK_ESCAPE);
+        if (key != 0)
+        {
+            exit = true;
+        }
+    }
+    EventSystem::Get()->UnregisterStateMachine(theLightSwitchRef);
+
+}
+
+void oldcode()
+{
+
+    //Roller();
+
+
 
     std::cout << StartEvent::Id << " " << PayLoadEvent::Id << " " << StopEvent::Id << std::endl;
 

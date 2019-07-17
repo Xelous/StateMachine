@@ -56,6 +56,7 @@ namespace xelous
         }
 
         void RegisterStateMachine(StateMachineWeakPtr& pStateMachine);
+        void UnregisterStateMachine(StateMachineWeakPtr& pStateMachine);
 
         template<typename T>
         void RaiseEvent(T* const pEvent)

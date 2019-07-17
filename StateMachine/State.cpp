@@ -13,6 +13,12 @@ namespace xelous
     StateBase::StateBase(const char* const name)
         : Name(name)
     {
+        Message("State Constructor [" + std::string(name) + "]");
+    }
+
+    StateBase::~StateBase()
+    {
+        Message("State Destructor [" + GetName() + "]");
     }
 
     const std::string StateBase::GetName() const noexcept
@@ -36,7 +42,6 @@ namespace xelous
 
     State::~State()
     {
-        Exit();
     }
 
     void State::Initialise()

@@ -199,6 +199,7 @@ namespace xelous
     {
         ExitState();
         mCurrentState = const_cast<State*>(newState);
+        mCurrentState->Enter();
     }
 
     void StateMachine::ExitState()

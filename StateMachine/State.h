@@ -35,9 +35,11 @@ namespace xelous
 
         const std::string GetName() const noexcept;
 
-        void RaiseEvent(Event<EventId, 1>* const event);
+        void RaiseEvent(Event<EventId, 1>* const event);        
 
     protected:
+        
+        ~StateBase();        
 
         void Enter()
         {
@@ -45,7 +47,7 @@ namespace xelous
         }
 
         void Exit()
-        {
+        {            
             OnExit();
         }
     };
@@ -59,7 +61,6 @@ namespace xelous
         friend class StateMachine;
 
         void SetChild(const State* newChild);
-
 
         void Initialise() override;
         void OnEnter() override;
