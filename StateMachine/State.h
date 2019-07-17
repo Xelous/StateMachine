@@ -52,6 +52,14 @@ namespace xelous
         }
     };
 
+#ifndef StateDefinitionHelper
+#define StateDefinitionHelper(StateName_)       \
+class StateName_ : public State  \
+    {\
+    public: \
+        static constexpr const char* const sStateName = #StateName_ ;
+#endif
+
     class State : public StateBase, public EventMessageHandler
     {
     private:

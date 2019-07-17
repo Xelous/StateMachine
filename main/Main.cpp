@@ -18,15 +18,27 @@
 #include "../examples/LigthSwitch/LightOffState.h"
 #include "../examples/LigthSwitch/SwitchToggledEvent.h"
 
+#include "../examples/ChildrenExercise/MainState.h"
+#include "../examples/ChildrenExercise/ChildState.h"
+#include "../examples/ChildrenExercise/EnterChildEvent.h"
+#include "../examples/ChildrenExercise/ExitChildEvent.h"
+
 int main()
 {
     xelous::EventSystem::Create();
+
     auto theLightSwitch = xelous::StateMachine::Create("LightSwitch", new xelous::LightOffState());
     auto theLightSwitchRef = theLightSwitch->GetReference();
     xelous::EventSystem::Get()->RegisterStateMachine(theLightSwitchRef);
 
+    auto theChildTest = xelous::StateMachine::Create("ChildTest", new xelous::MainState());
+    auto theChildTestRef = theChildTest->GetReference();
+    xelous::EventSystem::Get()->RegisterStateMachine(theChildTestRef);
+
     bool exit{ false };
     bool returnDown{ false };
+    bool downDown{ false };
+    bool upDown{ false };
     while (!exit)
     {
         auto key = GetAsyncKeyState(VK_RETURN);
@@ -52,9 +64,45 @@ int main()
         {
             exit = true;
         }
-    }
-    xelous::EventSystem::Get()->UnregisterStateMachine(theLightSwitchRef);
 
+        key = GetAsyncKeyState(VK_DOWN);
+        if (key != 0)
+        {
+            if (!downDown)
+            {
+                std::cout << "------ Down ---- " << std::endl;
+                xelous::EventSystem::Get()->RaiseEvent(new xelous::EnterChildEvent());
+                downDown = true;
+            }
+        }
+        else
+        {
+            if (downDown)
+            {
+                downDown = false;
+            }
+        }
+
+        key = GetAsyncKeyState(VK_UP);
+        if (key != 0)
+        {
+            if (!upDown)
+            {
+                std::cout << "------ Up ------" << std::endl;
+                xelous::EventSystem::Get()->RaiseEvent(new xelous::ExitChildEvent());
+                upDown = true;
+            }
+        }
+        else
+        {
+            if (upDown)
+            {
+                upDown = false;
+            }
+        }
+    }
+    xelous::EventSystem::Get()->UnregisterStateMachine(theChildTestRef);
+    xelous::EventSystem::Get()->UnregisterStateMachine(theLightSwitchRef);
 }
 
 //void oldcode()

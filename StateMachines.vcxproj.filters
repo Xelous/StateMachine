@@ -16,6 +16,9 @@
     <Filter Include="counter">
       <UniqueIdentifier>{68ed4044-2343-45b4-b5ba-883762d76c2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="examples\ChildrenExercise">
+      <UniqueIdentifier>{914dfc91-fa90-467f-906e-1e7aa815c191}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine\ActionResult.h">
@@ -48,6 +51,18 @@
     <ClInclude Include="counter\counter.hpp">
       <Filter>counter</Filter>
     </ClInclude>
+    <ClInclude Include="examples\ChildrenExercise\ChildState.h">
+      <Filter>examples\ChildrenExercise</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\ChildrenExercise\MainState.h">
+      <Filter>examples\ChildrenExercise</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\ChildrenExercise\EnterChildEvent.h">
+      <Filter>examples\ChildrenExercise</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\ChildrenExercise\ExitChildEvent.h">
+      <Filter>examples\ChildrenExercise</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine\Event.cpp">
@@ -73,6 +88,12 @@
     </ClCompile>
     <ClCompile Include="main\Main.cpp">
       <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\ChildrenExercise\ChildState.cpp">
+      <Filter>examples\ChildrenExercise</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\ChildrenExercise\MainState.cpp">
+      <Filter>examples\ChildrenExercise</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
