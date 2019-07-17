@@ -93,6 +93,7 @@
     <ClInclude Include="examples\ChildrenExercise\ChildState.h" />
     <ClInclude Include="examples\ChildrenExercise\EnterChildEvent.h" />
     <ClInclude Include="examples\ChildrenExercise\ExitChildEvent.h" />
+    <ClInclude Include="examples\ChildrenExercise\ExitToHereEvent.h" />
     <ClInclude Include="examples\ChildrenExercise\MainState.h" />
     <ClInclude Include="examples\LigthSwitch\LightOffState.h" />
     <ClInclude Include="examples\LigthSwitch\LightOnState.h" />
