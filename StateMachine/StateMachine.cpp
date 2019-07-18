@@ -179,7 +179,7 @@ namespace xelous
 
         case ActionResultCode::ExitChildState:
             ExitChildState();
-            break;
+            break;        
 
         case ActionResultCode::ExitStateMachine:
             ExitStateMachine();

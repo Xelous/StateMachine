@@ -63,9 +63,6 @@
     <ClInclude Include="examples\ChildrenExercise\ExitChildEvent.h">
       <Filter>examples\ChildrenExercise</Filter>
     </ClInclude>
-    <ClInclude Include="examples\ChildrenExercise\ExitToHereEvent.h">
-      <Filter>examples\ChildrenExercise</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine\Event.cpp">

@@ -59,13 +59,14 @@ namespace xelous
         }
 
         static StateMachineSharedPtr Create(const std::string& name,
-                                            State* initialState = nullptr);
+                                            State* initialState = nullptr);    
+
+    protected:
+        StateMachine(const std::string& name,
+                     State* initialState);
 
     private:
         friend class std::_Ref_count_obj<StateMachine>;
-
-        StateMachine(const std::string& name,
-                     State* initialState);
 
         ProcessingPriority mProcessingPriority {ProcessingPriority::Normal};
         State* mCurrentState {nullptr};

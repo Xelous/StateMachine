@@ -11,7 +11,7 @@ namespace xelous
         State(MainState::sStateName)
     {
         AddEventHandlerHelper(OnEnterChild, EnterChildEvent::Id, &MainState::OnEnterChild);
-        AddEventHandlerHelper(OnExitChild, ExitChildEvent::Id, &MainState::OnExitChild);
+        AddEventHandlerHelper(OnExitChild, ExitChildEvent::Id, &MainState::OnExitChild);        
     }
 
     ActionFunctionHelper(MainState::OnEnterChild)
@@ -30,5 +30,5 @@ namespace xelous
             actionResultOut = std::make_pair(ActionResultCode::ExitChildState, nullptr);
         }
         return true;
-    }
+    }    
 }

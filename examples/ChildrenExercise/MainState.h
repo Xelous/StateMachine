@@ -11,7 +11,7 @@ namespace xelous
 
     private:
         ActionFunctionHelper(OnEnterChild);
-        ActionFunctionHelper(OnExitChild);
+        ActionFunctionHelper(OnExitChild);        
     };
 }
 

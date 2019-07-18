@@ -42,6 +42,7 @@ namespace xelous
 
     State::~State()
     {
+        ExitChild();
     }
 
     void State::Initialise()
@@ -73,7 +74,7 @@ namespace xelous
     void State::ExitChild()
     {
         if (HasChild())
-        {
+        {            
             State* temp {nullptr};
             std::swap(mChild, temp);
             if (temp)
