@@ -1,0 +1,11 @@
+D:\Personal\StateMachine\Tool\SMGen\bin\Debug\SMGen.exe.config
+D:\Personal\StateMachine\Tool\SMGen\bin\Debug\SMGen.exe
+D:\Personal\StateMachine\Tool\SMGen\bin\Debug\SMGen.pdb
+D:\Personal\StateMachine\Tool\SMGen\obj\Debug\SMGen.csprojAssemblyReference.cache
+D:\Personal\StateMachine\Tool\SMGen\obj\Debug\SMGen.Form1.resources
+D:\Personal\StateMachine\Tool\SMGen\obj\Debug\SMGen.Properties.Resources.resources
+D:\Personal\StateMachine\Tool\SMGen\obj\Debug\SMGen.csproj.GenerateResource.cache
+D:\Personal\StateMachine\Tool\SMGen\obj\Debug\SMGen.csproj.CoreCompileInputs.cache
+D:\Personal\StateMachine\Tool\SMGen\obj\Debug\SMGen.exe
+D:\Personal\StateMachine\Tool\SMGen\obj\Debug\SMGen.pdb
+D:\Personal\StateMachine\Tool\SMGen\obj\Debug\SMGen.CreateBox.resources
