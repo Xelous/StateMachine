@@ -14,6 +14,8 @@
 #include "Event.h"
 #include "State.h"
 
+#include <vcruntime_new.h>
+
 
 namespace xelous
 {
@@ -65,9 +67,9 @@ namespace xelous
         StateMachine(const std::string& name,
                      State* initialState);
 
-    private:
-        friend class std::_Ref_count_obj<StateMachine>;
-
+    private:        
+        friend void* ::operator new(size_t);
+        
         ProcessingPriority mProcessingPriority {ProcessingPriority::Normal};
         State* mCurrentState {nullptr};
         std::atomic<bool> mMasterExitFlag {false};

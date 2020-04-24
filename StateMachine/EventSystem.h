@@ -22,8 +22,8 @@ namespace xelous
         static EventSystemSharedPtr sInstance;
 
         EventSystem();
-
-        friend class std::_Ref_count_obj<EventSystem>;
+        
+        friend void* ::operator new(size_t);
 
         std::atomic<bool> mExitFlag {false};
         std::thread mDeliveryThread;

@@ -85,7 +85,7 @@ namespace xelous
     {
         if (!sInstance)
         {
-            sInstance = std::make_shared<EventSystem>();
+            sInstance = std::shared_ptr<EventSystem>(new EventSystem());
         }
         return sInstance;
     }

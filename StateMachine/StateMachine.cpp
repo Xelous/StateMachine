@@ -9,7 +9,7 @@ namespace xelous
     StateMachineSharedPtr StateMachine::Create(const std::string& name,
                                                State* initialState)
     {
-        return std::make_shared<StateMachine>(name, initialState);
+        return std::shared_ptr<StateMachine>(new StateMachine(name, initialState));
     }
 
     StateMachine::StateMachine(const std::string& name,
@@ -17,7 +17,7 @@ namespace xelous
         : Name(name)
         , mCurrentState(initialState)
     {
-        Start();
+        Start();        
     }
 
     StateMachine::~StateMachine()
