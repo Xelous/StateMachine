@@ -103,6 +103,7 @@
     <ClInclude Include="StateMachine\EventSystem.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
+    <ClInclude Include="StateMachine\StateMachineSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="examples\ChildrenExercise\ChildState.cpp" />

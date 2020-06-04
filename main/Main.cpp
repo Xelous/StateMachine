@@ -8,11 +8,7 @@
 //=============================================
 // Start State Machine Test
 //=============================================
-#include "../StateMachine/State.h"
-#include "../StateMachine/Event.h"
-#include "../StateMachine/ActionResult.h"
-#include "../StateMachine/StateMachine.h"
-#include "../StateMachine/EventSystem.h"
+#include "../StateMachine/StateMachineSystem.h"
 
 #include "../examples/LigthSwitch/LightOnState.h"
 #include "../examples/LigthSwitch/LightOffState.h"
