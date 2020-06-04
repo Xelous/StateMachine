@@ -3,6 +3,8 @@
 #include <iostream>
 #include <mutex>
 #include <map>
+#include <vector>
+#include <queue>
 #include <functional>
 #include "Event.h"
 #include "ActionResult.h"
@@ -33,11 +35,16 @@ namespace xelous
                                              BaseEvent* const,
                                              ActionResult&)>;
 
+    using ActionFunctionList = std::vector<ActionFunction>;
+
     class EventMessageHandler
     {
     protected:
         std::mutex mLock;
-        std::map<EventId, ActionFunction> mRegisteredActions;
+        std::map<EventId, ActionFunctionList> mRegisteredActions;
+
+        std::mutex mEventQueueLock;
+        std::queue<BaseEvent*> mEventQueue;
 
         virtual void ProcessEventMessage(BaseEvent* const event,
                                          ActionResult& result,
@@ -46,6 +53,6 @@ namespace xelous
     public:
         const bool AddEventHandler(const EventId& eventId,
                                    ActionFunction ActionFunction);
-        const bool RemoveEventHandler(const EventId& eventId);
+        const bool RemoveEventHandlers(const EventId& eventId);
     };
 }

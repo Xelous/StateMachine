@@ -12,13 +12,17 @@ namespace xelous
 			mRegisteredActions.emplace(
 				std::make_pair(
 					eventId,
-					ActionFunction));
+					ActionFunctionList{ ActionFunction }));
 			result = true;
+		}
+		else
+		{
+			found->second.push_back(ActionFunction);
 		}
 		return result;
 	}
 
-	const bool EventMessageHandler::RemoveEventHandler(const EventId& eventId)
+	const bool EventMessageHandler::RemoveEventHandlers(const EventId& eventId)
 	{
 		bool result{ false };
 		std::scoped_lock lock(mLock);

@@ -89,18 +89,25 @@ namespace xelous
                                     ActionResult& result,
                                     bool& handled)
     {
+        handled = false;
         result.first = ActionResultCode::NoStateChange;
 
         if (event)
-        {
-            auto find = mRegisteredActions.find(event->EventIdCode());
-            if (find != mRegisteredActions.end())
+        {            
+            auto found = mRegisteredActions.find(event->EventIdCode());
+            if (found != mRegisteredActions.end())
             {
-                if (find->second != nullptr)
+                bool didHandle{ false };
+                const auto& functionList = found->second;
+                for (const auto& registeredFunction : functionList)
                 {
-                    handled = find->second(event, result);
+                    didHandle = registeredFunction(event, result);
                 }
-            }
+                if (!handled && didHandle)
+                {
+                    handled = true;
+                }
+            }            
         }
     }
 }

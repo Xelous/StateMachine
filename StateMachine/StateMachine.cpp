@@ -141,6 +141,7 @@ namespace xelous
                                            ActionResult& result,
                                            bool& handled)
     {
+        handled = false;
         if (event != nullptr)
         {
             if (mCurrentState)
@@ -148,15 +149,21 @@ namespace xelous
                 mCurrentState->ProcessEventMessage(event, result, handled);
             }
 
-            if (!handled &&
-                !mRegisteredActions.empty())
+            if (!mRegisteredActions.empty())
             {
                 auto found = mRegisteredActions.find(event->EventIdCode());
                 if (found != mRegisteredActions.end())
                 {
-                    auto function = found->second;
-
-                    handled = function(event, result);
+                    bool didHandle{ false };
+                    const auto& functionList = found->second;
+                    for (const auto& registeredFunction : functionList)
+                    {
+                        didHandle = registeredFunction(event, result);
+                    }
+                    if (!handled && didHandle)
+                    {
+                        handled = true;
+                    }
                 }
             }
         }
