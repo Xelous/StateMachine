@@ -1,5 +1,10 @@
 #include "EventSystem.h"
 
+namespace
+{
+    constexpr const auto sDeliveryDelay{ std::chrono::microseconds(100) };
+}
+
 namespace xelous
 {
     EventSystemSharedPtr EventSystem::sInstance {nullptr};
@@ -47,7 +52,7 @@ namespace xelous
         std::queue<BaseEvent*> localEventVersion;
         while (!mExitFlag)
         {
-            std::this_thread::sleep_for(std::chrono::microseconds(100));
+            std::this_thread::sleep_for(sDeliveryDelay);
 
             {
                 // Drain the event queue in one move

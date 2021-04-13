@@ -41,15 +41,9 @@ namespace xelous
         
         ~StateBase();        
 
-        void Enter()
-        {
-            OnEnter();
-        }
+        void Enter();
 
-        void Exit()
-        {            
-            OnExit();
-        }
+        void Exit();
     };
 
 #ifndef StateDefinitionHelper

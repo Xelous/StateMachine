@@ -1,15 +1,22 @@
 #include "State.h"
 
+#include <string_view>
 #include <iostream>
 #include "EventSystem.h"
 
-namespace xelous
+namespace
 {
-    void Message(const std::string& message)
+    void Message(const std::string_view message)
     {
+#ifdef _DEBUG
         std::cout << message << std::endl;
+#endif
+        // if not debug, intentionally empty
     }
+}
 
+namespace xelous
+{    
     StateBase::StateBase(const char* const name)
         : Name(name)
     {
@@ -19,6 +26,16 @@ namespace xelous
     StateBase::~StateBase()
     {
         Message("State Destructor [" + GetName() + "]");
+    }
+
+    void StateBase::Enter()
+    {
+        OnEnter();
+    }
+
+    void StateBase::Exit()
+    {
+        OnExit();
     }
 
     const std::string StateBase::GetName() const noexcept
